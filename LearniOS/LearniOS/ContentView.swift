@@ -6,16 +6,29 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var scenePhase
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        Text("Hello welcome to SwiftUI")
+        .onChange(of: scenePhase) { newValue in
+            if newValue == .active {
+                print("ContentView updated to active state")
+            }
+            if newValue == .inactive {
+                print("ContentView updated to inactive state")
+            }
+            if newValue == .background {
+                print("ContentView updated to background state")
+            }
         }
-        .padding()
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willTerminateNotification)) { _ in
+            print("willTerminateNotification notification recived")
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            print("didEnterBackgroundNotification notification recived")
+        }
     }
 }
 
