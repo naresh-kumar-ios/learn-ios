@@ -7,37 +7,57 @@
 
 import SwiftUI
 
+/**
+ 
+username: 'kminchelle',
+password: '0lelplR',
+ 
+ */
+
 struct LoginView: View {
 
-    @State var username: String = ""
-    @State var password: String = ""
-
+    @EnvironmentObject var store: LoginViewStore
+    
     var body: some View {
-        VStack {
-            Text("LOGIN")
-                .font(.largeTitle)
-            
-            TextField(text: $username) {
-                Text("User name")
+        ZStack {
+            /// Showing the loading
+            if store.loading {
+                /// show the loading when this loading property is true
+                ProgressView()
             }
-            .keyboardType(.emailAddress)
-            .frame(height: 44)
-            Divider()
-            
-            SecureField(text: $password) {
-                Text("Password")
-            }
-            .keyboardType(.asciiCapable)
-            .frame(height: 44)
-            Divider()
-
-            Button("Login") {
+            /// Showing the Loging view
+            VStack {
+                Text("LOGIN")
+                    .font(.largeTitle)
                 
+                TextField(text: $store.username) {
+                    Text("User name")
+                }
+                .keyboardType(.emailAddress)
+                .frame(height: 44)
+                Divider()
+                
+                SecureField(text: $store.password) {
+                    Text("Password")
+                }
+                .keyboardType(.asciiCapable)
+                .frame(height: 44)
+                Divider()
+
+                Button("Login") {
+                    store.login()
+                }
+                .padding(.top, 20)
+                .frame(height: 44)
             }
-            .padding(.top, 20)
-            .frame(height: 44)
+            
         }
         .padding()
+        .alert(store.message, isPresented: $store.showError) {
+            Button("OK") {
+                print("Error alert ok button presssed")
+            }
+        }
     }
 }
 

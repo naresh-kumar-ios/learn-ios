@@ -10,12 +10,12 @@ import XCTest
 
 final class LoginViewModelTests: XCTestCase {
     
-    var loginViewModel: LoginViewModel!
+    var loginViewModel: LoginViewStore!
     var parser: Parser?
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        loginViewModel = LoginViewModel()
+        loginViewModel = LoginViewStore()
         parser = Parser()
     }
 

@@ -10,9 +10,16 @@ import SwiftUI
 @main
 struct LearniOSApp: App {
     @Environment(\.scenePhase) private var scenePhase
+    
+    @State var loggedIn: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if loggedIn {
+                ProductListView()
+            } else {
+                LoginView().environmentObject(LoginViewStore(delegate: self))
+            }
         }
         .onChange(of: scenePhase) { newValue in
             if newValue == .active {
@@ -25,5 +32,11 @@ struct LearniOSApp: App {
                 print("WindowGroup updated to background state")
             }
         }
+    }
+}
+
+extension LearniOSApp: LoginViewStoreDelegate {
+    func loggedInSuccessFully() {
+        self.loggedIn = true
     }
 }
