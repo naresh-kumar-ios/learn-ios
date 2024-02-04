@@ -25,6 +25,7 @@
 		6468B7AF2B3D706E000C7C02 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6468B7AE2B3D706E000C7C02 /* LoginViewModelTests.swift */; };
 		6468B7B12B3D776A000C7C02 /* LoginRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6468B7B02B3D776A000C7C02 /* LoginRequestModel.swift */; };
 		6472DDCD2B6F5082005B433F /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6472DDCC2B6F5082005B433F /* ProductListView.swift */; };
+		6472DDD02B6F6C35005B433F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6472DDCF2B6F6C35005B433F /* Constants.swift */; };
 		64BBE3A62B5B9B7B00A684CE /* LoginResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BBE3A52B5B9B7B00A684CE /* LoginResponseModel.swift */; };
 		64BBE3A82B5B9B9B00A684CE /* BaseResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BBE3A72B5B9B9B00A684CE /* BaseResponseModel.swift */; };
 		64BBE3AB2B5B9F8C00A684CE /* loginResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 64BBE3AA2B5B9F8C00A684CE /* loginResponse.json */; };
@@ -75,6 +76,7 @@
 		6468B7AE2B3D706E000C7C02 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		6468B7B02B3D776A000C7C02 /* LoginRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestModel.swift; sourceTree = "<group>"; };
 		6472DDCC2B6F5082005B433F /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
+		6472DDCF2B6F6C35005B433F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		64BBE3A52B5B9B7B00A684CE /* LoginResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponseModel.swift; sourceTree = "<group>"; };
 		64BBE3A72B5B9B9B00A684CE /* BaseResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponseModel.swift; sourceTree = "<group>"; };
 		64BBE3AA2B5B9F8C00A684CE /* loginResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loginResponse.json; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		6429F71C2B639B0B0059688C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6472DDCE2B6F6C26005B433F /* Constants */,
 				6429F71D2B639B1B0059688C /* SessionManager */,
 			);
 			path = Utilities;
@@ -296,6 +299,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		6472DDCE2B6F6C26005B433F /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				6472DDCF2B6F6C35005B433F /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		64BBE3A92B5B9F7900A684CE /* LoginResponseMocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -442,6 +453,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6429F7252B639D730059688C /* SessionRoute.swift in Sources */,
+				6472DDD02B6F6C35005B433F /* Constants.swift in Sources */,
 				6429F71F2B639C560059688C /* SessionManager.swift in Sources */,
 				64C6F9662B65558B00B2350D /* MethodType.swift in Sources */,
 				64BBE3A82B5B9B9B00A684CE /* BaseResponseModel.swift in Sources */,

@@ -19,9 +19,9 @@ public protocol LoginViewStoreDelegate {
 
 public class LoginViewStore: ObservableObject {
     
-    @Published var username: String = "kminchelle"
+    @Published var username: String = ""
     
-    @Published var password: String = "0lelplR"
+    @Published var password: String = ""
     
     @Published var showError: Bool = false
         
@@ -35,32 +35,39 @@ public class LoginViewStore: ObservableObject {
         self.delegate = delegate
     }
     
-    public func login() {
+    /// This function will check if the user name and password are non empty then pass that to apu module else update the published variable to show an error.
+    /// - Parameter completion: This completion block is optional to indicate the end of the task.
+    public func login(_ completion: (() -> Void)? = nil) {
 
         guard let loginRequestModel = LoginRequestModel(email: username, password: password) else {
             print("Can't build the request as password might empty")
-            message = "Username or password can't be left blank"
+            self.showError = true
+            message = Constants.Messages.emptyPassword.rawValue
             return
         }
+        /// This statement would update the UI to show the loader.
         loading = true
         Task {
             do {
                 let data = try await SessionManager.shared.dataTask(route: LoginRoute.login(loginRequestModel), responseType: LoginResponseModelNew.self)
-                print("firstName - ", data.firstName ?? "")
-                print("lastName - ", data.lastName ?? "")
-                print("id - ", data.id)
-                print("gender - ", data.gender ?? "")
-                print("image - ", data.image ?? "")
-                print("token - ", data.token)
                 DispatchQueue.main.async { [weak self] in
+                    /// This statement would update the UI to hide the loader.
                     self?.loading = false
+                    /// This statement would update the AppRoute to set the product list view as main view
                     self?.delegate?.loggedInSuccessFully()
+                    /// This statement indicate the login function have been completed
+                    completion?()
                 }
             } catch {
                 DispatchQueue.main.async { [weak self] in
+                    /// This statement would update the UI to hide the loader.
                     self?.loading = false
-                    self?.showError = true
+                    /// This statement would show an error alert  to the user
                     self?.message = error.localizedDescription
+                    /// This statement would show an error alert  to the user
+                    self?.showError = true
+                    /// This statement indicate the login function have been completed
+                    completion?()
                 }
             }
         }
