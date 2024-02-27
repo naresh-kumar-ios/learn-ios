@@ -18,7 +18,7 @@ struct LearniOSApp: App {
             if loggedIn {
                 ProductListView()
             } else {
-                LoginView().environmentObject(LoginViewStore(delegate: self))
+                LoginView().environmentObject(LoginViewStore(delegate: self, loginServiceProvider: LoginServiceManager()))
             }
         }
         .onChange(of: scenePhase) { newValue in

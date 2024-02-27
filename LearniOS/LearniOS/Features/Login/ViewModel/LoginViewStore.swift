@@ -11,6 +11,7 @@ import Combine
 public enum LoginError: Error {
     case dataNotFound
     case someOtherError
+    case invalidCredentails
 }
 
 public protocol LoginViewStoreDelegate {
@@ -31,7 +32,10 @@ public class LoginViewStore: ObservableObject {
     
     var message: String = ""
     
-    public init(delegate: LoginViewStoreDelegate?) {
+    private var loginServiceProvider: LoginServiceProvider
+    
+    public init(delegate: LoginViewStoreDelegate?, loginServiceProvider: LoginServiceProvider) {
+        self.loginServiceProvider = loginServiceProvider
         self.delegate = delegate
     }
     
@@ -49,7 +53,7 @@ public class LoginViewStore: ObservableObject {
         loading = true
         Task {
             do {
-                let data = try await SessionManager.shared.dataTask(route: LoginRoute.login(loginRequestModel), responseType: LoginResponseModelNew.self)
+                let data = try await self.loginServiceProvider.login(with: loginRequestModel)
                 DispatchQueue.main.async { [weak self] in
                     /// This statement would update the UI to hide the loader.
                     self?.loading = false
